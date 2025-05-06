@@ -2,10 +2,14 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+const generateToken = (user) => {
+  return jwt.sign(
+    { id: user._id, name: user.name, email: user.email },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1d",
+    }
+  );
 };
 
 export const registerUser = async (req, res) => {
@@ -32,7 +36,7 @@ export const registerUser = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    token: generateToken(user._id),
+    token: generateToken(user),
   });
 };
 
@@ -53,7 +57,7 @@ export const loginUser = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    token: generateToken(user._id),
+    token: generateToken(user),
   });
 };
 
