@@ -9,3 +9,10 @@ Sami Munir | Rutgers University | samidmunir7@gmail.com
 ## Projects
 
 ### zephiron
+
+- MongoDB
+- Express
+- React
+  - Typescript
+  - TailwindCSS
+- Node
