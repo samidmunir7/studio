@@ -14,3 +14,18 @@ export const sendVerificationEmail = async (email, verificationToken) => {
     throw new Error("Error sending verification email.");
   }
 };
+
+export const sendPasswordResetEmail = async (email, resetURL) => {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      //   to: ["samidmunir7@gmail.com"],
+      to: [email],
+      subject: "Reset Your Password",
+      html: `<a href=${resetURL}>Click to reset your password.</a>`,
+    });
+  } catch (error) {
+    console.log("Error sending verification email:", error);
+    throw new Error("Error sending verification email.");
+  }
+};

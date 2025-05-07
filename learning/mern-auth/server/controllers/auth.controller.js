@@ -1,10 +1,14 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import {
   generateVerificationToken,
   generateJWTToken,
 } from "../utils/auth.utils.js";
-import { sendVerificationEmail } from "../config/email.js";
+import {
+  sendVerificationEmail,
+  sendPasswordResetEmail,
+} from "../config/email.js";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -116,4 +120,70 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ success: true, message: "Logout successful." });
+};
+
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found." });
+    }
+
+    const resetPasswordToken = crypto.randomBytes(32).toString("hex");
+    const resetPasswordExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
+
+    user.resetPasswordToken = resetPasswordToken;
+    user.resetPasswordExpiresAt = resetPasswordExpiresAt;
+
+    await user.save();
+
+    await sendPasswordResetEmail(
+      user.email,
+      `${process.env.CLIENT_URL}/reset-password/${resetPasswordToken}`
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Password reset email sent successfully.",
+    });
+  } catch (error) {
+    console.log("Error sending password reset email.", error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpiresAt: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid or expired reset token." });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpiresAt = undefined;
+
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Password reset successful." });
+  } catch (error) {
+    console.log("Error resetting password.", error);
+    res.status(400).json({ success: false, message: error.message });
+  }
 };
