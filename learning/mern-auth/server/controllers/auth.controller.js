@@ -55,7 +55,7 @@ export const verifyEmail = async (req, res) => {
   try {
     const user = await User.findOne({
       verificationToken: code,
-      verificaiontTokenExpiresAt: { $gt: Date.now() },
+      verificationTokenExpiresAt: { $gt: Date.now() },
     });
 
     if (!user) {
@@ -69,9 +69,48 @@ export const verifyEmail = async (req, res) => {
     user.verificationToken = undefined;
     user.verificationTokenExpiresAt = undefined;
     await user.save();
-  } catch (error) {}
+
+    res
+      .status(200)
+      .json({ success: true, message: "Email verified successfully." });
+  } catch (error) {
+    console.log("Error verifying email.", error);
+    res.status(400).json({ success: false, message: error.message });
+  }
 };
 
-export const login = async (req, res) => {};
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid credentials." });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid credentials." });
+    }
+
+    const isVerified = user.isVerified;
+    if (!isVerified) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email not verified." });
+    }
+
+    generateJWTToken(res, user._id);
+
+    res.status(200).json({ success: true, message: "Login successful." });
+  } catch (error) {
+    console.log("Error loggin in", error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
 
 export const logout = async (req, res) => {};
