@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const generateVerificationToken = () => {
-  Math.floor(100000 + Math.random() * 90000).toString();
+  return Math.floor(100000 + Math.random() * 90000).toString();
 };
 
 export const generateJWTToken = (res, userId) => {
