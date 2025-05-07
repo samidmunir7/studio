@@ -14,7 +14,7 @@ const generateToken = (user) => {
   );
 };
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -38,7 +38,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -62,5 +62,3 @@ const login = async (req, res) => {
     res.status(500).json({ message: "Login failed.", error: error.message });
   }
 };
-
-export default { register, login };
