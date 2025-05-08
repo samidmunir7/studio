@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useAuthStore } from "../store/authStore.js";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -9,6 +12,10 @@ export default function LoginPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const { login, isLoading, error } = useAuthStore();
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,9 +30,16 @@ export default function LoginPage() {
     setIsSubmitting(true);
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    await login(formData.email, formData.password);
 
     console.log("Login submitted:", formData);
+
+    if (!error && !isLoading) {
+      toast.success("Login successful.");
+      navigate("/");
+    }
     setIsSubmitting(false);
     setIsSuccess(true);
 

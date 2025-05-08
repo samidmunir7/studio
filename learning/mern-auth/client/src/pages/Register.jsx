@@ -33,7 +33,9 @@ const RegisterPage = () => {
     // await new Promise((resolve) => setTimeout(resolve, 1000));
 
     await register(formData.name, formData.email, formData.password);
-    setTimeout(() => toast.success("Logging in"), 2000);
+    toast.success(
+      "Registration successful! Please check your email for verification."
+    );
     navigate("/verify-email");
 
     // console.log("Form submitted:", formData);
