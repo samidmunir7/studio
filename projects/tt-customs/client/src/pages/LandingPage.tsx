@@ -1,8 +1,10 @@
+import Hero from "../components/Hero";
+
 const LandingPage = () => {
   return (
     <div>
       {/* HERO SECTION */}
-      <div></div>
+      <Hero />
     </div>
   );
 };
