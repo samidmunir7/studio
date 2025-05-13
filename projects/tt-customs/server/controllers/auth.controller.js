@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "tt_customs_jwt_secret";
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1d";
 
 export const register = async (req, res) => {
   try {
@@ -20,9 +21,7 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, JWT_EXPIRES_IN);
 
     res.status(201).json({
       token,
@@ -32,5 +31,34 @@ export const register = async (req, res) => {
     res
       .status(500)
       .json({ message: "Registration failed.", error: err.message });
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "Invalid email or password. (A)" });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res
+        .status(400)
+        .json({ message: "Invalid email or password. (B)" });
+    }
+
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, JWT_EXPIRES_IN);
+
+    res.status(200).json({
+      token,
+      user: { id: user._id, name: user.name, email: user.email },
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Login failed.", error: err.message });
   }
 };
