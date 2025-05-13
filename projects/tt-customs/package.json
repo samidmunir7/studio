@@ -1,9 +1,11 @@
 {
   "name": "tt-customs",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server/server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server/server.js",
+    "server": "nodemon server/server.js"
   },
   "author": "Zephorin",
   "license": "ISC",

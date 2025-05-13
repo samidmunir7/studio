@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
@@ -16,4 +17,7 @@ app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log("JWT_SECRET:", process.env.JWT_SECRET); // should show actual key
+
+  connectDB();
 });

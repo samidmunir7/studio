@@ -1,4 +1,8 @@
+import { useAuth } from "../context/AuthContext";
+
 const DashboardPage = () => {
+  const { logout } = useAuth();
+
   const user = {
     name: "Sami Munir",
     email: "sami@ttcustoms.com",
@@ -133,7 +137,10 @@ const DashboardPage = () => {
             <button className="w-full border border-zinc-500 hover:bg-zinc-800 text-white py-2 px-4 rounded-md font-semibold">
               Update Info
             </button>
-            <button className="w-full bg-rose-600 hover:bg-rose-700 text-white py-2 px-4 rounded-md font-semibold">
+            <button
+              onClick={logout}
+              className="w-full bg-rose-600 hover:bg-rose-700 text-white py-2 px-4 rounded-md font-semibold"
+            >
               Log Out
             </button>
           </div>

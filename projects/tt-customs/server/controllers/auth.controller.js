@@ -21,13 +21,16 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, JWT_EXPIRES_IN);
+    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRES_IN,
+    });
 
     res.status(201).json({
       token,
       user: { id: newUser._id, name: newUser.name, email: newUser.email },
     });
   } catch (err) {
+    console.log("REGISTRATION_FAILED!");
     res
       .status(500)
       .json({ message: "Registration failed.", error: err.message });
@@ -52,7 +55,9 @@ export const login = async (req, res) => {
         .json({ message: "Invalid email or password. (B)" });
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, JWT_EXPIRES_IN);
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRES_IN,
+    });
 
     res.status(200).json({
       token,

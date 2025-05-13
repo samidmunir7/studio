@@ -10,6 +10,7 @@ import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Footer from "./components/Footer";
+import Protected from "./components/Protected";
 import DashboardPage from "./pages/DashboardPage";
 
 const App = () => {
@@ -26,7 +27,14 @@ const App = () => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <Protected>
+              <DashboardPage />
+            </Protected>
+          }
+        />
       </Routes>
       <Footer />
     </AnimatePresence>
