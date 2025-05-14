@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
 export type ServiceItem = {
-  id: number;
+  id: string;
   name: string;
   cost: number;
 };
