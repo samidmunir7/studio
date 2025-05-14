@@ -26,3 +26,12 @@ export const getBookingsByUser = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch bookings" });
   }
 };
+
+export const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find().populate("serviceId");
+    res.json(bookings);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch all bookings" });
+  }
+};
