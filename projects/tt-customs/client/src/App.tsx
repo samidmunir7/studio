@@ -15,6 +15,7 @@ import DashboardPage from "./pages/DashboardPage";
 import AdminProductPage from "./pages/admin/AdminProductPage";
 import AdminProductForm from "./pages/admin/AdminProductForm";
 import AdminServicePage from "./pages/admin/AdminServicePage";
+import AdminServiceForm from "./pages/admin/AdminServiceForm";
 
 const App = () => {
   const location = useLocation();
@@ -67,6 +68,22 @@ const App = () => {
           element={
             <Protected>
               <AdminServicePage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/admin/services/new"
+          element={
+            <Protected>
+              <AdminServiceForm />
+            </Protected>
+          }
+        />
+        <Route
+          path="/admin/services/edit/:id"
+          element={
+            <Protected>
+              <AdminServiceForm />
             </Protected>
           }
         />
