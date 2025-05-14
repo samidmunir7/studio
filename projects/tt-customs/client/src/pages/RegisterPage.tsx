@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    adminCode: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -66,6 +71,16 @@ const RegisterPage = () => {
             className="w-full bg-zinc-800 text-white p-4 rounded-md"
             required
           />
+          {/* ADMIN_CODE INPUT */}
+          <input
+            type="text"
+            name="adminCode"
+            placeholder="Admin Code (optional)"
+            value={form.adminCode}
+            onChange={handleChange}
+            className="w-full bg-zinc-800 text-white p-4 rounded-md"
+          />
+
           <button
             type="submit"
             className="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-md"

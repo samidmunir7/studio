@@ -4,10 +4,11 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "tt_customs_jwt_secret";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1d";
+const ADMIN_CODE = process.env.ADMIN_CODE || "664729";
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, adminCode } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -15,10 +16,14 @@ export const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const role = adminCode === ADMIN_CODE ? "admin" : "general";
+
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
@@ -27,7 +32,12 @@ export const register = async (req, res) => {
 
     res.status(201).json({
       token,
-      user: { id: newUser._id, name: newUser.name, email: newUser.email },
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+      },
     });
   } catch (err) {
     console.log("REGISTRATION_FAILED!");
