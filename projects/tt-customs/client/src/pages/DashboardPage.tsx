@@ -649,6 +649,20 @@ const DashboardPage = () => {
               </ResponsiveContainer>
             </div>
           </div>
+          <div className="w-full flex justify-center gap-16">
+            <button
+              onClick={() => navigate("/admin/products")}
+              className="w-[500px] text-2xl font-semibold border-2 border-sky-500 px-4 py-2 rounded-md hover:bg-sky-500 transition-all"
+            >
+              Manage Products
+            </button>
+            <button
+              onClick={() => navigate("/admin/services")}
+              className="w-[500px] text-2xl font-semibold border-2 border-rose-500 px-4 py-2 rounded-md hover:bg-rose-500 transition-all"
+            >
+              Manage Services
+            </button>
+          </div>
         </>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-12">
