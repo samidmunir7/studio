@@ -252,7 +252,10 @@ const DashboardPage = () => {
               <p className="text-zinc-400 mb-4 text-sm">
                 Control your services, pricing, and booking availability.
               </p>
-              <button className="bg-sky-600 hover:bg-sky-700 px-4 py-2 rounded-md font-semibold text-white">
+              <button
+                onClick={() => navigate("/admin/services")}
+                className="bg-sky-600 hover:bg-sky-700 px-4 py-2 rounded-md font-semibold text-white"
+              >
                 Go to Services
               </button>
             </div>
