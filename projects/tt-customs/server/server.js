@@ -4,6 +4,8 @@ import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
 import productRouter from "./routes/product.routes.js";
 import serviceRouter from "./routes/service.routes.js";
+import orderRouter from "./routes/order.route.js";
+import bookingRouter from "./routes/booking.route.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/services", serviceRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/bookings", bookingRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
