@@ -1,97 +1,437 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-// Sample Product Data
-const allProducts = [
-  {
-    id: 1,
-    name: "Performance Exhaust",
-    price: 799.99,
-    brand: "Borla",
-    manufacturer: "Ford",
-    fitment: "Mustang GT",
-    type: "Exhaust",
-    image: "/images/exhaust.jpg",
-    installable: true,
-  },
-  {
-    id: 2,
-    name: "Cold Air Intake",
-    price: 349.0,
-    brand: "K&N",
-    manufacturer: "Chevy",
-    fitment: "Camaro SS",
-    type: "Intake",
-    image: "/images/intake.jpg",
-    installable: true,
-  },
-  {
-    id: 3,
-    name: "Carbon Spoiler",
-    price: 599.0,
-    brand: "APR",
-    manufacturer: "BMW",
-    fitment: "M4",
-    type: "Aero",
-    image: "/images/spoiler.jpg",
-    installable: false,
-  },
-  {
-    id: 4,
-    name: "Performance Coilovers",
-    price: 1249.0,
-    brand: "BC Racing",
-    manufacturer: "Subaru",
-    fitment: "WRX STI",
-    type: "Suspension",
-    image: "/images/coilovers.jpg",
-    installable: true,
-  },
-];
+// // Sample Product Data
+// const allProducts = [
+//   {
+//     id: 1,
+//     name: "Performance Exhaust",
+//     price: 799.99,
+//     brand: "Borla",
+//     manufacturer: "Ford",
+//     fitment: "Mustang GT",
+//     type: "Exhaust",
+//     image: "/images/exhaust.jpg",
+//     installable: true,
+//   },
+//   {
+//     id: 2,
+//     name: "Cold Air Intake",
+//     price: 349.0,
+//     brand: "K&N",
+//     manufacturer: "Chevy",
+//     fitment: "Camaro SS",
+//     type: "Intake",
+//     image: "/images/intake.jpg",
+//     installable: true,
+//   },
+//   {
+//     id: 3,
+//     name: "Carbon Spoiler",
+//     price: 599.0,
+//     brand: "APR",
+//     manufacturer: "BMW",
+//     fitment: "M4",
+//     type: "Aero",
+//     image: "/images/spoiler.jpg",
+//     installable: false,
+//   },
+//   {
+//     id: 4,
+//     name: "Performance Coilovers",
+//     price: 1249.0,
+//     brand: "BC Racing",
+//     manufacturer: "Subaru",
+//     fitment: "WRX STI",
+//     type: "Suspension",
+//     image: "/images/coilovers.jpg",
+//     installable: true,
+//   },
+// ];
 
-// Filter Options
-const brands = [...new Set(allProducts.map((p) => p.brand))];
-const manufacturers = [...new Set(allProducts.map((p) => p.manufacturer))];
-const types = [...new Set(allProducts.map((p) => p.type))];
+// // Filter Options
+// const brands = [...new Set(allProducts.map((p) => p.brand))];
+// const manufacturers = [...new Set(allProducts.map((p) => p.manufacturer))];
+// const types = [...new Set(allProducts.map((p) => p.type))];
+
+// const ProductsPage = () => {
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [selectedBrand, setSelectedBrand] = useState("");
+//   const [selectedManufacturer, setSelectedManufacturer] = useState("");
+//   const [selectedType, setSelectedType] = useState("");
+//   const [sortOption, setSortOption] = useState("");
+//   const [cart, setCart] = useState<number[]>([]);
+
+//   // Filtering + Searching
+//   let filteredProducts = allProducts.filter((p) =>
+//     p.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+//   if (selectedBrand)
+//     filteredProducts = filteredProducts.filter(
+//       (p) => p.brand === selectedBrand
+//     );
+//   if (selectedManufacturer)
+//     filteredProducts = filteredProducts.filter(
+//       (p) => p.manufacturer === selectedManufacturer
+//     );
+//   if (selectedType)
+//     filteredProducts = filteredProducts.filter((p) => p.type === selectedType);
+
+//   // Sorting
+//   if (sortOption === "priceLowHigh")
+//     filteredProducts.sort((a, b) => a.price - b.price);
+//   else if (sortOption === "priceHighLow")
+//     filteredProducts.sort((a, b) => b.price - a.price);
+//   else if (sortOption === "nameAZ")
+//     filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+//   else if (sortOption === "nameZA")
+//     filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+
+//   // Cart Logic
+//   const toggleCart = (id: number) => {
+//     setCart((prev) =>
+//       prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
+//     );
+//   };
+
+//   return (
+//     <main className="bg-black text-zinc-100 px-6 md:px-12 lg:px-24 py-20">
+//       {/* Header */}
+//       <div className="text-center mb-12">
+//         <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+//           Our Products
+//         </h1>
+//         <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+//           Explore premium auto parts and accessories for every build and budget.
+//         </p>
+//       </div>
+
+//       {/* Controls */}
+//       <div className="flex flex-col lg:flex-row gap-6 justify-between mb-10">
+//         {/* Search */}
+//         <input
+//           type="text"
+//           placeholder="Search products..."
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//           className="w-full lg:max-w-md bg-zinc-800 px-4 py-3 rounded-lg text-white"
+//         />
+
+//         {/* Filters */}
+//         <div className="flex flex-wrap gap-4 text-sm text-black">
+//           <select
+//             className="bg-white px-3 py-2 rounded-md"
+//             value={selectedBrand}
+//             onChange={(e) => setSelectedBrand(e.target.value)}
+//           >
+//             <option value="">All Brands</option>
+//             {brands.map((b) => (
+//               <option key={b} value={b}>
+//                 {b}
+//               </option>
+//             ))}
+//           </select>
+
+//           <select
+//             className="bg-white px-3 py-2 rounded-md"
+//             value={selectedManufacturer}
+//             onChange={(e) => setSelectedManufacturer(e.target.value)}
+//           >
+//             <option value="">All Manufacturers</option>
+//             {manufacturers.map((m) => (
+//               <option key={m} value={m}>
+//                 {m}
+//               </option>
+//             ))}
+//           </select>
+
+//           <select
+//             className="bg-white px-3 py-2 rounded-md"
+//             value={selectedType}
+//             onChange={(e) => setSelectedType(e.target.value)}
+//           >
+//             <option value="">All Types</option>
+//             {types.map((t) => (
+//               <option key={t} value={t}>
+//                 {t}
+//               </option>
+//             ))}
+//           </select>
+
+//           {/* Sort */}
+//           <select
+//             className="bg-white px-3 py-2 rounded-md"
+//             value={sortOption}
+//             onChange={(e) => setSortOption(e.target.value)}
+//           >
+//             <option value="">Sort</option>
+//             <option value="priceLowHigh">Price: Low to High</option>
+//             <option value="priceHighLow">Price: High to Low</option>
+//             <option value="nameAZ">Name: A-Z</option>
+//             <option value="nameZA">Name: Z-A</option>
+//           </select>
+//         </div>
+//       </div>
+
+//       {/* Layout: Products + Cart */}
+//       <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+//         {/* Products */}
+//         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+//           {filteredProducts.map((product) => (
+//             <div
+//               key={product.id}
+//               className="bg-zinc-900 p-4 rounded-xl shadow-lg hover:shadow-sky-500/30 transition"
+//             >
+//               <img
+//                 src={product.image}
+//                 alt={product.name}
+//                 className="rounded-md w-full h-40 object-cover mb-4"
+//               />
+//               <h3 className="text-xl font-bold mb-1">{product.name}</h3>
+//               <p className="text-zinc-400 mb-2">${product.price.toFixed(2)}</p>
+//               <p className="text-sm text-zinc-500 mb-2">
+//                 {product.brand} • {product.manufacturer}
+//               </p>
+//               <button
+//                 onClick={() => toggleCart(product.id)}
+//                 className={`w-full py-2 px-4 rounded-md font-semibold transition ${
+//                   cart.includes(product.id)
+//                     ? "bg-rose-600 hover:bg-rose-700 text-white"
+//                     : "border border-sky-500 hover:bg-sky-500 hover:text-black text-white"
+//                 }`}
+//               >
+//                 {cart.includes(product.id) ? "Remove from Cart" : "Add to Cart"}
+//               </button>
+//               {product.installable && (
+//                 <button
+//                   className="mt-3 w-full py-2 px-4 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-md"
+//                   onClick={() => alert("Redirecting to booking...")}
+//                 >
+//                   Schedule Service
+//                 </button>
+//               )}
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Cart */}
+//         <div className="bg-zinc-900 p-6 rounded-xl h-fit sticky top-24">
+//           <h2 className="text-2xl font-bold mb-4 text-white">Cart</h2>
+//           {cart.length === 0 ? (
+//             <p className="text-zinc-400 italic">No items added yet.</p>
+//           ) : (
+//             <ul className="text-zinc-300 space-y-3 text-sm">
+//               {cart.map((id) => {
+//                 const product = allProducts.find((p) => p.id === id);
+//                 return (
+//                   <li key={id}>
+//                     {product?.name} — ${product?.price.toFixed(2)}
+//                   </li>
+//                 );
+//               })}
+//             </ul>
+//           )}
+//         </div>
+//       </div>
+//     </main>
+//   );
+// };
+
+// export default ProductsPage;
+
+// import { useEffect, useState } from "react";
+
+// type Product = {
+//   _id: string;
+//   name: string;
+//   brand: string;
+//   manufacturer: string;
+//   fitment: string;
+//   type: string;
+//   price: number;
+//   quantity: number;
+//   description: string;
+//   images: string[];
+//   installable: boolean;
+// };
+
+// const ProductsPage = () => {
+//   const [products, setProducts] = useState<Product[]>([]);
+//   const [cart, setCart] = useState<string[]>([]);
+
+//   useEffect(() => {
+//     fetch("http://localhost:3000/api/products")
+//       .then((res) => res.json())
+//       .then((data) => setProducts(data))
+//       .catch((err) => console.error("Failed to fetch products:", err));
+//   }, []);
+
+//   console.log("Products:", products);
+
+//   const toggleCart = (id: string) => {
+//     setCart((prev) =>
+//       prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
+//     );
+//   };
+
+//   return (
+//     <main className="bg-black text-zinc-100 px-6 md:px-12 lg:px-24 py-20">
+//       <div className="text-center mb-12">
+//         <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+//           Our Products
+//         </h1>
+//         <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+//           Explore high-performance upgrades and premium styling parts curated
+//           for your build.
+//         </p>
+//       </div>
+
+//       <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+//         {/* Product Cards */}
+//         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+//           {products.map((product) => (
+//             <div
+//               key={product._id}
+//               className="bg-zinc-900 p-4 rounded-xl shadow-md hover:shadow-sky-500/30 transition space-y-3"
+//             >
+//               <div className="w-full h-48 bg-zinc-800 rounded-md overflow-hidden">
+//                 {product.images?.[0] ? (
+//                   <img
+//                     src={product.images[0]}
+//                     alt={product.name}
+//                     className="w-full h-full object-cover"
+//                   />
+//                 ) : (
+//                   <div className="h-full flex items-center justify-center text-zinc-500">
+//                     No Image
+//                   </div>
+//                 )}
+//               </div>
+//               <h3 className="text-xl font-bold text-white">{product.name}</h3>
+//               <p className="text-sm text-zinc-400">{product.description}</p>
+//               <div className="text-sm text-zinc-500">
+//                 {product.brand} • {product.manufacturer}
+//               </div>
+//               <div className="text-rose-500 font-bold text-lg">
+//                 ${product.price.toFixed(2)}
+//               </div>
+
+//               <button
+//                 onClick={() => toggleCart(product._id)}
+//                 className={`w-full py-2 px-4 rounded-md font-semibold transition ${
+//                   cart.includes(product._id)
+//                     ? "bg-rose-600 hover:bg-rose-700 text-white"
+//                     : "border border-sky-500 hover:bg-sky-500 hover:text-black text-white"
+//                 }`}
+//               >
+//                 {cart.includes(product._id)
+//                   ? "Remove from Cart"
+//                   : "Add to Cart"}
+//               </button>
+
+//               {product.installable && (
+//                 <button
+//                   className="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white py-2 px-4 rounded-md font-semibold"
+//                   onClick={() => alert("Redirect to booking...")}
+//                 >
+//                   Schedule Installation
+//                 </button>
+//               )}
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Cart Panel */}
+//         <div className="bg-zinc-900 p-6 rounded-xl h-fit sticky top-24 shadow-lg">
+//           <h2 className="text-2xl font-bold mb-4">Cart</h2>
+//           {cart.length === 0 ? (
+//             <p className="text-zinc-400 italic">No products in cart yet.</p>
+//           ) : (
+//             <ul className="text-sm text-zinc-300 space-y-3">
+//               {cart.map((id) => {
+//                 const p = products.find((p) => p._id === id);
+//                 return (
+//                   <li key={id}>
+//                     {p?.name} — ${p?.price.toFixed(2)}
+//                   </li>
+//                 );
+//               })}
+//             </ul>
+//           )}
+//         </div>
+//       </div>
+//     </main>
+//   );
+// };
+
+// export default ProductsPage;
+
+import { useEffect, useState } from "react";
+
+type Product = {
+  _id: string;
+  name: string;
+  brand: string;
+  manufacturer: string;
+  fitment: string;
+  type: string;
+  price: number;
+  quantity: number;
+  description: string;
+  images: string[];
+  installable: boolean;
+};
 
 const ProductsPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedManufacturer, setSelectedManufacturer] = useState("");
-  const [selectedType, setSelectedType] = useState("");
-  const [sortOption, setSortOption] = useState("");
-  const [cart, setCart] = useState<number[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filtered, setFiltered] = useState<Product[]>([]);
+  const [cart, setCart] = useState<string[]>([]);
 
-  // Filtering + Searching
-  let filteredProducts = allProducts.filter((p) =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  if (selectedBrand)
-    filteredProducts = filteredProducts.filter(
-      (p) => p.brand === selectedBrand
-    );
-  if (selectedManufacturer)
-    filteredProducts = filteredProducts.filter(
-      (p) => p.manufacturer === selectedManufacturer
-    );
-  if (selectedType)
-    filteredProducts = filteredProducts.filter((p) => p.type === selectedType);
+  const [search, setSearch] = useState("");
+  const [brand, setBrand] = useState("");
+  const [manufacturer, setManufacturer] = useState("");
+  const [type, setType] = useState("");
+  const [sort, setSort] = useState("");
 
-  // Sorting
-  if (sortOption === "priceLowHigh")
-    filteredProducts.sort((a, b) => a.price - b.price);
-  else if (sortOption === "priceHighLow")
-    filteredProducts.sort((a, b) => b.price - a.price);
-  else if (sortOption === "nameAZ")
-    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-  else if (sortOption === "nameZA")
-    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setFiltered(data);
+      })
+      .catch((err) => console.error("Failed to fetch products:", err));
+  }, []);
 
-  // Cart Logic
-  const toggleCart = (id: number) => {
+  useEffect(() => {
+    let temp = [...products];
+
+    if (search) {
+      temp = temp.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    if (brand) temp = temp.filter((p) => p.brand === brand);
+    if (manufacturer)
+      temp = temp.filter((p) => p.manufacturer === manufacturer);
+    if (type) temp = temp.filter((p) => p.type === type);
+
+    if (sort === "priceLowHigh") temp.sort((a, b) => a.price - b.price);
+    if (sort === "priceHighLow") temp.sort((a, b) => b.price - a.price);
+    if (sort === "nameAZ") temp.sort((a, b) => a.name.localeCompare(b.name));
+    if (sort === "nameZA") temp.sort((a, b) => b.name.localeCompare(a.name));
+
+    setFiltered(temp);
+  }, [search, brand, manufacturer, type, sort, products]);
+
+  const toggleCart = (id: string) => {
     setCart((prev) =>
       prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
     );
   };
+
+  const brands = [...new Set(products.map((p) => p.brand))];
+  const manufacturers = [...new Set(products.map((p) => p.manufacturer))];
+  const types = [...new Set(products.map((p) => p.type))];
 
   return (
     <main className="bg-black text-zinc-100 px-6 md:px-12 lg:px-24 py-20">
@@ -101,7 +441,8 @@ const ProductsPage = () => {
           Our Products
         </h1>
         <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-          Explore premium auto parts and accessories for every build and budget.
+          High-performance upgrades and premium styling — filter, search, and
+          select what suits your build.
         </p>
       </div>
 
@@ -111,8 +452,8 @@ const ProductsPage = () => {
         <input
           type="text"
           placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="w-full lg:max-w-md bg-zinc-800 px-4 py-3 rounded-lg text-white"
         />
 
@@ -120,8 +461,8 @@ const ProductsPage = () => {
         <div className="flex flex-wrap gap-4 text-sm text-black">
           <select
             className="bg-white px-3 py-2 rounded-md"
-            value={selectedBrand}
-            onChange={(e) => setSelectedBrand(e.target.value)}
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)}
           >
             <option value="">All Brands</option>
             {brands.map((b) => (
@@ -133,8 +474,8 @@ const ProductsPage = () => {
 
           <select
             className="bg-white px-3 py-2 rounded-md"
-            value={selectedManufacturer}
-            onChange={(e) => setSelectedManufacturer(e.target.value)}
+            value={manufacturer}
+            onChange={(e) => setManufacturer(e.target.value)}
           >
             <option value="">All Manufacturers</option>
             {manufacturers.map((m) => (
@@ -146,8 +487,8 @@ const ProductsPage = () => {
 
           <select
             className="bg-white px-3 py-2 rounded-md"
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
+            value={type}
+            onChange={(e) => setType(e.target.value)}
           >
             <option value="">All Types</option>
             {types.map((t) => (
@@ -157,11 +498,10 @@ const ProductsPage = () => {
             ))}
           </select>
 
-          {/* Sort */}
           <select
             className="bg-white px-3 py-2 rounded-md"
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
           >
             <option value="">Sort</option>
             <option value="priceLowHigh">Price: Low to High</option>
@@ -172,59 +512,80 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      {/* Layout: Products + Cart */}
+      {/* Products + Cart */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
-        {/* Products */}
+        {/* Product Cards */}
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
+          {filtered.map((product) => (
             <div
-              key={product.id}
-              className="bg-zinc-900 p-4 rounded-xl shadow-lg hover:shadow-sky-500/30 transition"
+              key={product._id}
+              className="bg-zinc-900 p-4 rounded-xl shadow-md hover:shadow-sky-500/30 transition space-y-3"
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="rounded-md w-full h-40 object-cover mb-4"
-              />
-              <h3 className="text-xl font-bold mb-1">{product.name}</h3>
-              <p className="text-zinc-400 mb-2">${product.price.toFixed(2)}</p>
-              <p className="text-sm text-zinc-500 mb-2">
+              <div className="w-full h-48 bg-zinc-800 rounded-md overflow-hidden">
+                {product.images?.[0] ? (
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="h-full flex items-center justify-center text-zinc-500">
+                    No Image
+                  </div>
+                )}
+              </div>
+              <h3 className="text-xl font-bold text-white">{product.name}</h3>
+              <p className="text-sm text-zinc-400">{product.description}</p>
+              <div className="text-sm text-zinc-500">
                 {product.brand} • {product.manufacturer}
-              </p>
+              </div>
+              <div className="text-rose-500 font-bold text-lg">
+                ${product.price.toFixed(2)}
+              </div>
+
               <button
-                onClick={() => toggleCart(product.id)}
+                onClick={() => toggleCart(product._id)}
                 className={`w-full py-2 px-4 rounded-md font-semibold transition ${
-                  cart.includes(product.id)
+                  cart.includes(product._id)
                     ? "bg-rose-600 hover:bg-rose-700 text-white"
                     : "border border-sky-500 hover:bg-sky-500 hover:text-black text-white"
                 }`}
               >
-                {cart.includes(product.id) ? "Remove from Cart" : "Add to Cart"}
+                {cart.includes(product._id)
+                  ? "Remove from Cart"
+                  : "Add to Cart"}
               </button>
+
               {product.installable && (
                 <button
-                  className="mt-3 w-full py-2 px-4 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-md"
-                  onClick={() => alert("Redirecting to booking...")}
+                  className="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white py-2 px-4 rounded-md font-semibold"
+                  onClick={() => alert("Redirect to booking...")}
                 >
-                  Schedule Service
+                  Schedule Installation
                 </button>
               )}
             </div>
           ))}
         </div>
 
-        {/* Cart */}
-        <div className="bg-zinc-900 p-6 rounded-xl h-fit sticky top-24">
-          <h2 className="text-2xl font-bold mb-4 text-white">Cart</h2>
+        {/* Cart Panel */}
+        <div className="bg-zinc-900 p-6 rounded-2xl h-fit sticky top-24 shadow-xl border border-zinc-700">
+          <h2 className="text-2xl font-bold mb-4 text-white">🛒 Your Cart</h2>
           {cart.length === 0 ? (
-            <p className="text-zinc-400 italic">No items added yet.</p>
+            <p className="text-zinc-400 italic">No items in cart.</p>
           ) : (
             <ul className="text-zinc-300 space-y-3 text-sm">
               {cart.map((id) => {
-                const product = allProducts.find((p) => p.id === id);
+                const item = products.find((p) => p._id === id);
                 return (
-                  <li key={id}>
-                    {product?.name} — ${product?.price.toFixed(2)}
+                  <li
+                    key={id}
+                    className="flex justify-between border-b border-zinc-700 pb-1"
+                  >
+                    <span>{item?.name}</span>
+                    <span className="text-rose-500">
+                      ${item?.price.toFixed(2)}
+                    </span>
                   </li>
                 );
               })}
