@@ -12,6 +12,8 @@ import RegisterPage from "./pages/RegisterPage";
 import Footer from "./components/Footer";
 import Protected from "./components/Protected";
 import DashboardPage from "./pages/DashboardPage";
+import AdminProductPage from "./pages/admin/AdminProductPage";
+import AdminProductForm from "./pages/admin/AdminProductForm";
 
 const App = () => {
   const location = useLocation();
@@ -32,6 +34,30 @@ const App = () => {
           element={
             <Protected>
               <DashboardPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <Protected>
+              <AdminProductPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/admin/products/new"
+          element={
+            <Protected>
+              <AdminProductForm />
+            </Protected>
+          }
+        />
+        <Route
+          path="/admin/products/edit/:id"
+          element={
+            <Protected>
+              <AdminProductForm />
             </Protected>
           }
         />

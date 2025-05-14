@@ -6,7 +6,12 @@ import {
   useEffect,
 } from "react";
 
-type User = { id: string; name: string; email: string };
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "general";
+};
 
 interface AuthContextType {
   user: User | null;
