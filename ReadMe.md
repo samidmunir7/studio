@@ -34,3 +34,12 @@ Sami Munir | Rutgers University | samidmunir7@gmail.com
   - Typescript
   - TailwindCSS
 - Node
+
+### career-dock
+
+- MongoDB
+- Express
+- React
+  - Typescript
+  - TailwindCSS
+- Node
