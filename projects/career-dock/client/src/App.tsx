@@ -1,8 +1,11 @@
+import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+
 const App = () => {
   return (
-    <div>
-      <h1>CAREER DOCK</h1>
-    </div>
+    <>
+      <Navbar />
+    </>
   );
 };
 
