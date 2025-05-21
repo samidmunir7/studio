@@ -14,8 +14,8 @@ const Hero = () => {
             Track your career search journey!
           </h2>
           <div className="flex items-center justify-center gap-8 mt-8">
-            <CTAPrimary />
-            <CTASecondary />
+            <CTAPrimary label="Login" />
+            <CTASecondary label="Get Started" />
           </div>
         </div>
       </div>
