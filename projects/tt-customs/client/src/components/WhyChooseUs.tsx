@@ -37,8 +37,8 @@ const WhyChooseUs = () => {
           <div className="text-rose-500 text-4xl mb-4">✅</div>
           <h3 className="text-xl font-bold mb-2">Certified Technicians</h3>
           <p className="text-zinc-400 text-sm">
-            Trusted professionals with years of hands-on experience in tuning,
-            repairs, and styling.
+            Trusted professionals with years of hands-on experience in
+            diagnostics, electronics, and personalized automotive ugprades.
           </p>
         </div>
 

@@ -15,20 +15,22 @@ const Services = () => {
         {/* Service Card 1 */}
         <div className="bg-zinc-900 rounded-xl p-6 shadow-lg hover:shadow-rose-500/30 transition">
           <div className="text-rose-500 text-4xl mb-4">🛠️</div>
-          <h3 className="text-xl font-bold mb-2">Performance Tuning</h3>
+          <h3 className="text-xl font-bold mb-2">
+            Apple/Android Car Play Upgrades
+          </h3>
           <p className="text-zinc-400 text-sm">
-            Boost your car's power and precision with expert ECU remapping and
-            dyno-tuned upgrades.
+            Got an older vehicle? Boost your driving experience with our Apple
+            Car Play or Android Auto installations.
           </p>
         </div>
 
         {/* Service Card 2 */}
         <div className="bg-zinc-900 rounded-xl p-6 shadow-lg hover:shadow-sky-500/30 transition">
           <div className="text-sky-500 text-4xl mb-4">🎨</div>
-          <h3 className="text-xl font-bold mb-2">Custom Wraps & Detailing</h3>
+          <h3 className="text-xl font-bold mb-2">Interior Ambience Upgrades</h3>
           <p className="text-zinc-400 text-sm">
-            Turn heads with personalized vinyl wraps, paint protection, and deep
-            detailing.
+            Turn heads with personalized ambient lighting and starlight roof
+            installations.
           </p>
         </div>
 

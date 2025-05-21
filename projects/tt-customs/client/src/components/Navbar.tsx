@@ -74,8 +74,6 @@ import {
   MdAccountTree,
   MdGroup,
   MdDashboard,
-  MdLogout,
-  MdSettings,
 } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 import ttc_logo from "../assets/ttc_logo.jpg";

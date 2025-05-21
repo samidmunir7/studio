@@ -60,7 +60,7 @@ const Footer = () => {
                 +1 (234) 567-890
               </a>
             </li>
-            <li>Location: Los Angeles, CA</li>
+            <li>Location: London, United Kingdom</li>
           </ul>
           <div className="flex mt-4 gap-4 text-xl">
             <a href="#" className="hover:text-rose-500 transition">
