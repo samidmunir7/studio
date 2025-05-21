@@ -1,8 +1,4 @@
-import {
-  BsEnvelopeFill,
-  BsFillLockFill,
-  BsShieldLockFill,
-} from "react-icons/bs";
+import { BsEnvelopeFill, BsShieldLockFill } from "react-icons/bs";
 import { useState } from "react";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";

@@ -1,9 +1,11 @@
 import CTAPrimary from "./ui/CTAPrimary";
 import CTASecondary from "./ui/CTASecondary";
+import { useUser } from "../context/UserContext";
 
 const Hero = () => {
+  const { user } = useUser();
   return (
-    <section className="w-full bg-zinc-800 p-16 h-[88vh] flex justify-center items-center">
+    <section className="w-full bg-zinc-800 p-16 h-[87.5vh] flex justify-center items-center">
       <div className="bg-zinc-900 w-full h-full flex items-center justify-center">
         <div>
           <h1 className="text-5xl text-zinc-300">
@@ -14,8 +16,13 @@ const Hero = () => {
             Track your career search journey!
           </h2>
           <div className="flex items-center justify-center gap-8 mt-8">
-            <CTAPrimary label="Login" />
-            <CTASecondary label="Get Started" />
+            {user ? (
+              <CTASecondary label="Get Started" />
+            ) : (
+              <CTAPrimary label="Login" />
+            )}
+            {/* <CTASecondary label="Get Started" />
+            <CTAPrimary label="Login" /> */}
           </div>
         </div>
       </div>
