@@ -38,15 +38,15 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="w-full bg-zinc-800 p-16 h-[88vh] flex justify-center items-center">
+    <section className="w-full bg-zinc-800 p-16 h-[87.5vh] flex justify-center items-center">
       <div className="bg-zinc-900 w-full h-full flex items-center justify-center">
-        <div>
+        <div className="bg-zinc-700 px-16 py-8 rounded-md shadow-2xl">
           <h1 className="text-5xl text-zinc-300 font-semibold">
             Login to your <span className="text-amber-500">Career-Dock</span>{" "}
             account
           </h1>
-          <form className="flex flex-col items-center mt-4">
-            <div className="flex items-center gap-4 text-amber-500 text-xl">
+          <form className="flex flex-col items-center mt-8 bg-zinc-800 p-8 rounded-md shadow-2xl">
+            <div className="flex items-center gap-4 text-amber-500 text-xl mt-4">
               <BsEnvelopeFill size={36} />
               <input
                 type="email"
@@ -54,11 +54,11 @@ const LoginPage = () => {
                 placeholder="Email"
                 value={form.email}
                 onChange={handleChange}
-                className="placeholder-amber-500 outline-none border-2 border-amber-500 px-2 py-1 rounded-md"
+                className="w-[550px] placeholder-amber-500 outline-none border-2 border-amber-500 px-2 py-1 rounded-md"
                 required
               />
             </div>
-            <div className="flex items-center gap-4 text-amber-500 text-xl mt-4">
+            <div className="flex items-center gap-4 text-amber-500 text-xl mt-8">
               <BsShieldLockFill size={36} />
               <input
                 type="password"
@@ -66,14 +66,14 @@ const LoginPage = () => {
                 placeholder="Password"
                 value={form.password}
                 onChange={handleChange}
-                className="placeholder-amber-500 outline-none border-2 border-amber-500 px-2 py-1 rounded-md"
+                className="w-[550px] placeholder-amber-500 outline-none border-2 border-amber-500 px-2 py-1 rounded-md"
                 required
               />
             </div>
             <button
               type="submit"
               onClick={handleSubmit}
-              className="w-[100px] text-center text-lg text-amber-500 font-bold border-2 border-amber-500 px-4 py-2 rounded-md hover:bg-amber-500 hover:text-zinc-900 transition-all mt-4"
+              className="w-[600px] text-lg text-amber-500 font-bold border-2 border-amber-500 px-4 py-2 rounded-md hover:bg-amber-500 hover:text-zinc-900 transition-all mt-16"
             >
               Login
             </button>

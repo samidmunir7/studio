@@ -44,7 +44,7 @@ const RegisterPage = () => {
 
       alert("Registration successful! Please log in.");
 
-      navigate("/dashboard");
+      navigate("/login");
     } catch (err: any) {
       alert(err.message);
     }
@@ -53,12 +53,12 @@ const RegisterPage = () => {
   return (
     <section className="w-full bg-zinc-800 p-16 h-[87.5vh] flex justify-center items-center">
       <div className="bg-zinc-900 w-full h-full flex items-center justify-center">
-        <div>
+        <div className="bg-zinc-700 px-16 py-8 rounded-md shadow-2xl">
           <h1 className="text-5xl text-zinc-300 font-semibold">
             Register for a new{" "}
             <span className="text-amber-500">Career-Dock</span> account
           </h1>
-          <form className="flex flex-col items-center mt-16 bg-zinc-800 p-8 rounded-md shadow-2xl">
+          <form className="flex flex-col items-center mt-8 bg-zinc-800 p-8 rounded-md shadow-2xl">
             <div className="flex items-center justify-between w-[650px]">
               <div className="flex items-center gap-4 text-amber-500 text-xl">
                 <BsFillPersonFill size={36} />
