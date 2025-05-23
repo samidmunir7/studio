@@ -5,8 +5,8 @@ import { useUser } from "../context/UserContext";
 const Hero = () => {
   const { user } = useUser();
   return (
-    <section className="w-full bg-zinc-800 p-16 h-[87.25vh] flex justify-center items-center">
-      <div className="bg-zinc-900 w-full h-full flex items-center justify-center">
+    <section className="w-full bg-zinc-800 p-8 h-[50vh] flex justify-center items-center">
+      <div className="bg-zinc-900 w-full h-full flex items-center justify-center rounded-md shadow-2xl">
         <div>
           <h1 className="text-5xl text-zinc-300">
             Welcome to{" "}
@@ -24,8 +24,6 @@ const Hero = () => {
                 <CTASecondary label="Get Started" />
               </div>
             )}
-            {/* <CTASecondary label="Get Started" />
-            <CTAPrimary label="Login" /> */}
           </div>
         </div>
       </div>

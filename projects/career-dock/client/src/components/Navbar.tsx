@@ -58,7 +58,7 @@ const Navbar = () => {
   const [profileOpen, setProfileOpen] = useState(false);
 
   return (
-    <div className="w-full px-16 py-4 bg-zinc-900 flex items-center justify-between">
+    <div className="w-full px-16 py-4 bg-zinc-900 flex items-center justify-between cursor-default">
       <div className="flex items-center gap-2 text-4xl text-amber-500 font-bold uppercase">
         <BsOpencollective />
         <h1>Career Dock</h1>
