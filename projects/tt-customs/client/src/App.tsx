@@ -16,12 +16,14 @@ import AdminProductPage from "./pages/admin/AdminProductPage";
 import AdminProductForm from "./pages/admin/AdminProductForm";
 import AdminServicePage from "./pages/admin/AdminServicePage";
 import AdminServiceForm from "./pages/admin/AdminServiceForm";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   const location = useLocation();
   return (
     <AnimatePresence>
       <Navbar />
+      <ToastContainer position="top-right" />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />

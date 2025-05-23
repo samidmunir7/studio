@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,8 @@ const RegisterPage = () => {
         throw new Error(data.message || "Registration failed.");
       }
 
-      alert("Registration successful. Please login.");
+      // alert("Registration successful. Please login.");
+      toast.success("Registration Successful!");
       navigate("/login");
     } catch (err: any) {
       alert(err.message);
