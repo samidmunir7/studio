@@ -37,3 +37,49 @@ export const getAllRecordsByUserId = async (req, res) => {
       .json({ message: "Error getting records for user.", error: err.message });
   }
 };
+
+export const getRecordById = async (req, res) => {
+  try {
+    const record = await Record.findById(req.params.id);
+    if (!record) {
+      console.log("Failed to find record.");
+      return res.status(400).json({
+        message: "Failed to find record.",
+        error: "Invalid/unknown record ID.",
+      });
+    }
+    return res.status(200).json({ message: "Record found.", record: record });
+  } catch (err) {
+    console.log("Failed to find record.");
+    return res.status(500).json({
+      message: "Failed to find record.",
+      error: "Invalid/unknown record ID.",
+    });
+  }
+};
+
+export const updateRecord = async (req, res) => {
+  try {
+    const updated = await Record.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    return res.json(updated);
+  } catch (err) {
+    console.log("Failed to update record.");
+    return res
+      .status(500)
+      .json({ message: "Failed to update record.", error: err.message });
+  }
+};
+
+export const deleteRecord = async (req, res) => {
+  try {
+    await Record.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: "Record deleted successfully." });
+  } catch (err) {
+    console.log("Failed to delete record.");
+    return res
+      .status(500)
+      .json({ message: "Failed to delete record.", error: err.message });
+  }
+};
