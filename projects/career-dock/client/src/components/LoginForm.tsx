@@ -2,6 +2,7 @@ import { BsEnvelopeFill, BsShieldLockFill } from "react-icons/bs";
 import { useState } from "react";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const { login } = useUser();
@@ -26,12 +27,21 @@ const LoginForm = () => {
 
       const data = await res.json();
       if (!res.ok) {
+        toast.error("Login failed.", {
+          autoClose: 3000,
+          theme: "dark",
+        });
         throw new Error(data.message || "Login failed.");
       }
 
       login(data.token, data.user);
 
       navigate("/dashboard");
+
+      toast.success("You are logged in", {
+        autoClose: 3000,
+        theme: "dark",
+      });
     } catch (err: any) {
       alert(err.message);
     }

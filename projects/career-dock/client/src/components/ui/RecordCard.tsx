@@ -3,6 +3,7 @@ import CTASecondary from "./CTASecondary";
 import CTAThird from "./CTAThird";
 
 type RecordCardProps = {
+  id: string;
   title: String;
   category: String;
   company: String;
@@ -26,13 +27,13 @@ const RecordCard = (props: RecordCardProps) => {
         <h2>{props.type.toLocaleUpperCase()}</h2>
         <h3>{props.country}</h3>
       </div>
-      <div className="p-4 text-lg text-zinc-300">
+      <div className="p-4 text-lg text-zinc-300 truncate">
         <p>{props.description}</p>
       </div>
       <div className="p-4 flex items-center justify-between">
         <CTAPrimary label="View" />
         <CTASecondary label="Edit" />
-        <CTAThird label="Delete" />
+        <CTAThird label="Delete" recordId={props.id} />
       </div>
       <div className="p-4 flex items-center justify-end cursor-default">
         <p className="text-md text-zinc-500">

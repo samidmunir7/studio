@@ -5,7 +5,9 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import CreateProductPage from "./pages/CreateProductPage";
 import Protected from "./components/Protected";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const location = useLocation();
@@ -13,6 +15,7 @@ const App = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer position="top-right" />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<LandingPage />} />
         <Route
@@ -25,6 +28,7 @@ const App = () => {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/create" element={<CreateProductPage />} />
       </Routes>
       <Footer />
     </>

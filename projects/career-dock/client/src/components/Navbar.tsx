@@ -12,6 +12,7 @@ import RegisterButton from "./ui/RegisterButton";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 // import LogoutButton from "./ui/LogoutButton";
 
 const commonNavItems = [
@@ -108,6 +109,10 @@ const Navbar = () => {
               <button
                 onClick={() => {
                   logout();
+                  toast.success("You are logged out.", {
+                    autoClose: 3000,
+                    theme: "dark",
+                  });
                   setProfileOpen(false);
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-rose-500 text-sm text-white"

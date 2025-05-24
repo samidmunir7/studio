@@ -3,6 +3,7 @@ import LogoutButton from "./ui/LogoutButton";
 import RecordCard from "./ui/RecordCard";
 
 type Record = {
+  _id: string;
   title: String;
   category: String;
   company: String;
@@ -58,9 +59,10 @@ const UserPanel = (props: UserPanelProps) => {
         <h1 className="text-4xl text-center my-8 font-semibold text-amber-500 uppercase">
           Your Application Records
         </h1>
-        <div className="flex items-center justify-between flex-wrap gap-16 p-8">
+        <div className="flex items-center flex-wrap gap-16 p-8">
           {props.records.map((record) => (
             <RecordCard
+              id={record._id}
               title={record.title}
               category={record.category}
               company={record.company}

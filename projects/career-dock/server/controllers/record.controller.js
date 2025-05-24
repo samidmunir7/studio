@@ -2,8 +2,22 @@ import Record from "../models/record.model.js";
 import User from "../models/user.model.js";
 
 export const create = async (req, res) => {
-  const { userId, title, category, company, description, country, type } =
-    req.body;
+  const {
+    userId,
+    title,
+    category,
+    company,
+    url,
+    description,
+    type,
+    status,
+    city,
+    state,
+    country,
+    skills,
+    salary,
+    hourly,
+  } = req.body;
 
   try {
     const user = User.findById({ userId });

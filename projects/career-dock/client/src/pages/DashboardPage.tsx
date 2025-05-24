@@ -21,6 +21,13 @@ const DashboardPage = () => {
     return records;
   };
 
+  // const handleDelete = async (recordId: string) => {
+  //   await fetch(`http://localhost:3000/api/record/delete/${recordId}`, {
+  //     method: "DELETE",
+  //   });
+  //   fetchRecords();
+  // };
+
   useEffect(() => {
     fetchRecords();
   }, []);
