@@ -12,7 +12,7 @@ import RegisterButton from "./ui/RegisterButton";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import LogoutButton from "./ui/LogoutButton";
+// import LogoutButton from "./ui/LogoutButton";
 
 const commonNavItems = [
   {
@@ -83,7 +83,7 @@ const Navbar = () => {
               link={navItem.link}
             />
           ))}
-          <LogoutButton />
+          {/* <LogoutButton /> */}
         </div>
       )}
       {user ? (
