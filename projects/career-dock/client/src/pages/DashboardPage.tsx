@@ -16,7 +16,7 @@ const DashboardPage = () => {
       }
     );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     setRecords(data);
     return records;
   };

@@ -77,7 +77,7 @@ export const updateRecord = async (req, res) => {
     const updated = await Record.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    return res.json(updated);
+    return res.status(200).json(updated);
   } catch (err) {
     console.log("Failed to update record.");
     return res

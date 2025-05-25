@@ -8,6 +8,7 @@ type Record = {
   category: String;
   company: String;
   type: String;
+  status: String;
   country: String;
   description: String;
   createdAt: String;
@@ -67,6 +68,7 @@ const UserPanel = (props: UserPanelProps) => {
               category={record.category}
               company={record.company}
               type={record.type}
+              status={record.status}
               country={record.country}
               description={record.description}
               createdAt={record.createdAt}

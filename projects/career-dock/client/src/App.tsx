@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import CreateProductPage from "./pages/CreateProductPage";
+import EditProductPage from "./pages/EditProductPage";
 import Protected from "./components/Protected";
 import { ToastContainer } from "react-toastify";
 
@@ -28,7 +29,22 @@ const App = () => {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/create" element={<CreateProductPage />} />
+        <Route
+          path="/create"
+          element={
+            <Protected>
+              <CreateProductPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/record/edit/:id"
+          element={
+            <Protected>
+              <EditProductPage />
+            </Protected>
+          }
+        />
       </Routes>
       <Footer />
     </>
